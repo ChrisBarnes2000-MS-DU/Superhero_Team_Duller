@@ -6,5 +6,10 @@ class Dog:
     def bark(self):
         print("Supper Woof!")
 
+    def sit(self):
+        print("{} sits".format(self.name))
+
+    def rollover(self):
+        print("{} rolls over".format(self.name))
 
 #this ends the Dog class
