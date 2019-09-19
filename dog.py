@@ -7,5 +7,4 @@ class Dog:
         print("Supper Woof!")
 
 
-
 #this ends the Dog class
