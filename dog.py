@@ -13,3 +13,5 @@ class Dog:
         print("{} rolls over".format(self.name))
 
 #this ends the Dog class
+
+Dog.greeting = "Woof"
