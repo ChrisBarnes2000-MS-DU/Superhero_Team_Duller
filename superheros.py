@@ -13,6 +13,9 @@ class Ability():
         ''' Return a value between 0 and the value set by self.max_damage.'''
         return random.randint(0, self.max_damage)
 
+    def __repr__(self):
+        return "Ability: {}, max damage: {}".format(self.name, self.max_damage)
+
 class Armor():
     def __init__(self, name, max_block):
         '''Instantiate instance properties.
@@ -45,12 +48,13 @@ class Hero():
         ''' Add ability to abilities list '''
         self.abilities.append(new_ability)
 
-    def get_abilities(self):
+    def display_abilities(self):
         for ability in self.abilities:
-            print("{}'s abilities are {} ".format(self.name, ability))
+            print("{}'s abilities are {} ".format(self.name, ability.name))
 
     def attack():
-        pass
+        total_damage = 0
+
 
     def defend(self, incoming_damage):
         pass
@@ -68,12 +72,14 @@ class Hero():
 if __name__ == "__main__":
     # If you run this file from the terminal
     # this block is executed.
-    ability = Ability("Debugging Ability", 50)
+    ability = Ability("Debugging", 50)
+    second_ability = Ability("Coding", 50)
     hero = Hero("Grace Hopper", 200)
     hero.add_ability(ability)
+    hero.add_ability(second_ability)
     print("Your new Hero is: {}".format(hero.name))
     print(hero.abilities)
-    hero.get_abilities()
+    hero.display_abilities()
 
     #print(ability.name)
     print(ability.attack())
