@@ -49,11 +49,21 @@ class Hero():
         self.abilities.append(new_ability)
 
     def display_abilities(self):
-        for ability in self.abilities:
-            print("{}'s abilities are {} ".format(self.name, ability.name))
+        print("{}'s abilities are ".format(self.name), end="")
+        for i, ability in enumerate(self.abilities):
+            if i == len(self.abilities)-1:
+                print("{}".format(ability.name), end="")
+            else:
+                print("{}, ".format(ability.name), end="")
 
-    def attack():
+    def attack(self):
+        '''Calculate the total damage from all ability attacks.
+          return: total:Int
+        '''
         total_damage = 0
+        for ability in self.abilities:
+            total_damage += ability.attack()
+        return total_damage
 
 
     def defend(self, incoming_damage):
@@ -62,8 +72,8 @@ class Hero():
     def take_damage(self, damage):
         pass
 
-    def is_alive():
-        pass
+    def is_alive(self):
+        return self.current_health == 0
 
     def fight(Hero):
         pass
@@ -82,5 +92,5 @@ if __name__ == "__main__":
     hero.display_abilities()
 
     #print(ability.name)
-    print(ability.attack())
+    print("\n{}".format(ability.attack()))
     print(hero.current_health)
