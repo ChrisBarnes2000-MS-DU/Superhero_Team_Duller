@@ -42,7 +42,12 @@ class Hero():
         self.armor = []
 
     def add_ability(self, new_ability):
+        ''' Add ability to abilities list '''
         self.abilities.append(new_ability)
+
+    def get_abilities(self):
+        for ability in self.abilities:
+            print("{}'s abilities are {} ".format(self.name, ability))
 
     def attack():
         pass
@@ -63,6 +68,13 @@ class Hero():
 if __name__ == "__main__":
     # If you run this file from the terminal
     # this block is executed.
-    ability = Ability("Debugging Ability", 20)
-    print(ability.name)
+    ability = Ability("Debugging Ability", 50)
+    hero = Hero("Grace Hopper", 200)
+    hero.add_ability(ability)
+    print("Your new Hero is: {}".format(hero.name))
+    print(hero.abilities)
+    hero.get_abilities()
+
+    #print(ability.name)
     print(ability.attack())
+    print(hero.current_health)
