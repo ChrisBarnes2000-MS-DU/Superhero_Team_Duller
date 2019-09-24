@@ -15,27 +15,42 @@ class Ability():
 
 class Armor():
     def __init__(self, name, max_block):
+        '''Instantiate instance properties.
+            name: String
+            max_block: Integer
+        '''
         self.name = name
         self.max_block = max_block
 
     def block(self):
+        ''' Return a random value between 0 and the initialized max_block strength. '''
         pass
 
 class Hero():
     def __init__(self, name, starting_health = 100):
+        '''Instance properties:
+          abilities: List
+          armors: List
+          name: String
+          starting_health: Integer
+          current_health: Integer
+      '''
         self.name = name
         self.starting_health = starting_health
+        self.current_health = starting_health
+        self.abilities = []
+        self.armor = []
 
-    def add_ability(Ability):
-        pass
+    def add_ability(self, new_ability):
+        self.abilities.append(new_ability)
 
     def attack():
         pass
 
-    def defend(incoming_damage):
+    def defend(self, incoming_damage):
         pass
 
-    def take_damage(damage):
+    def take_damage(self, damage):
         pass
 
     def is_alive():
