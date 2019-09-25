@@ -58,16 +58,27 @@ class Hero():
 
     def attack(self):
         '''Calculate the total damage from all ability attacks.
-          return: total:Int
+            return: total:Int
         '''
         total_damage = 0
         for ability in self.abilities:
             total_damage += ability.attack()
         return total_damage
 
+    def add_armor(self, armor):
+        '''Add armor to self.armors
+          Armor: Armor Object
+        '''
+        self.armor.append(armor)
 
     def defend(self, incoming_damage):
-        pass
+        '''Runs `block` method on each armor.
+            Returns sum of all blocks
+        '''
+        total_block = 0
+        for armor in self.armors:
+            total_block += armor.block()
+        return total_block
 
     def take_damage(self, damage):
         pass
