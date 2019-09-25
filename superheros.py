@@ -27,7 +27,7 @@ class Armor():
 
     def block(self):
         ''' Return a random value between 0 and the initialized max_block strength. '''
-        pass
+        return random.randint(0, self.max_block)
 
 class Hero():
     def __init__(self, name, starting_health = 100):
@@ -52,7 +52,7 @@ class Hero():
         print("{}'s abilities are ".format(self.name), end="")
         for i, ability in enumerate(self.abilities):
             if i == len(self.abilities)-1:
-                print("{}".format(ability.name), end="")
+                print("& {} \n".format(ability.name), end="")
             else:
                 print("{}, ".format(ability.name), end="")
 
@@ -76,15 +76,31 @@ class Hero():
             Returns sum of all blocks
         '''
         total_block = 0
-        for armor in self.armors:
-            total_block += armor.block()
-        return total_block
+        if len(self.armor) == 0:
+            print("You have no armor on, so 0 defence is provided")
+            return 0
+        else:
+            for armor in self.armor:
+                print("{} armor has {} defence".format(armor.name, armor.max_block))
+                total_block += armor.block()
+            print("total block/defence {}".format(total_block))
+            return total_block
 
     def take_damage(self, damage):
-        pass
+        '''Updates self.current_health to reflect the damage minus the defense.'''
+        print ("incoming damage {}".format(damage))
+        defence = self.defend(damage)
+        defended_damage = (damage - defence)
+        print("You take", defended_damage, "damage")
+        self.current_health -= defended_damage
+
+    def get_current_health(self):
+        print("Your hero's current hp is: {}".format(hero.current_health))
 
     def is_alive(self):
-        return self.current_health == 0
+        '''Return True or False depending on whether the hero is alive or not.'''
+        if self.current_health > 0: return True
+        else: return False
 
     def fight(Hero):
         pass
@@ -93,15 +109,23 @@ class Hero():
 if __name__ == "__main__":
     # If you run this file from the terminal
     # this block is executed.
-    ability = Ability("Debugging", 50)
-    second_ability = Ability("Coding", 50)
-    hero = Hero("Grace Hopper", 200)
-    hero.add_ability(ability)
-    hero.add_ability(second_ability)
-    print("Your new Hero is: {}".format(hero.name))
-    print(hero.abilities)
-    hero.display_abilities()
+    hero = Hero("Iron Bat", 200)
+    print("Your new Hero is: {} starting with: {} hp\n".format(
+        hero.name, hero.current_health))
 
-    #print(ability.name)
-    print("\n{}".format(ability.attack()))
-    print(hero.current_health)
+    hero.add_ability(Ability("Lazar Eyes", 500))
+    hero.add_ability(Ability("Super Speed", 50))
+    hero.display_abilities()
+    print(hero.abilities)
+
+    hero.get_current_health()
+    print("\nIs the hero still alive: {}".format(hero.is_alive()))
+    hero.take_damage(50)
+    hero.get_current_health()
+    print("\nIs the hero still alive: {}".format(hero.is_alive()))
+
+    print("\nputting on chest plate for protection")
+    hero.add_armor(Armor("Chest Plate", 60))
+    hero.take_damage(50)
+    hero.get_current_health()
+    print("\nIs the hero still alive: {}".format(hero.is_alive()))
