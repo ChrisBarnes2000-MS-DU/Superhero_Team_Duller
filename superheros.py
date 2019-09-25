@@ -43,6 +43,7 @@ class Hero():
         self.current_health = starting_health
         self.abilities = []
         self.armor = []
+        print("Your new Hero is: {} starting with: {} hp\n".format(self.name, self.current_health))
 
     def add_ability(self, new_ability):
         ''' Add ability to abilities list '''
@@ -77,7 +78,7 @@ class Hero():
         '''
         total_block = 0
         if len(self.armor) == 0:
-            print("You have no armor on, so 0 defence is provided")
+            print("{} has no armor on, so 0 defence is provided".format(self.name))
             return 0
         else:
             for armor in self.armor:
@@ -91,41 +92,77 @@ class Hero():
         print ("incoming damage {}".format(damage))
         defence = self.defend(damage)
         defended_damage = (damage - defence)
-        print("You take", defended_damage, "damage")
+        print("{} takes {} damage".format(self.name, defended_damage))
         self.current_health -= defended_damage
+        print("{} is now at {}/{} hp".format(self.name, self.current_health, self.starting_health))
 
     def get_current_health(self):
         print("Your hero's current hp is: {}".format(hero.current_health))
 
     def is_alive(self):
         '''Return True or False depending on whether the hero is alive or not.'''
-        if self.current_health > 0: return True
-        else: return False
+        if self.current_health > 0:
+            print("{} is still alive".format(self.name))
+            return True
+        else: 
+            print("{} has died".format(self.name))
+            return False
 
-    def fight(Hero):
-        pass
+    def fight(self, opponent):
+        ''' Current Hero will take turns fighting the opponent hero passed in.'''
+        """This function will need to take into account the possibility that both heroes may not have abilities and therefore will do no damage.
+        --check if to see that at least one hero has an ability. If no abilities exist print out "Draw"
+        """
+        if len(self.abilities) == 0 or len(opponent.abilities) == 0: print("Draw")
+        else:
+            winner = ""
+            fighting = True
+            while (fighting):
+                print("\n\t___First Attacker___\n")
+            
+                print("{} attacks {}".format(self.name, opponent.name))
+                opponent.take_damage(self.attack())
+                fighting = opponent.is_alive()
 
+                print("\n\t___Second Attacker___\n")
+
+                print("{} attacks {}".format(opponent.name, self.name))
+                self.take_damage(opponent.attack())
+                fighting = self.is_alive()
+            '''Check to see whose left alive and return the winner'''
+            if (not fighting and opponent.is_alive()):    
+                winner = ("{} won!".format(opponent.name))
+            else:
+                winner = ("{} won!".format(self.name))
+            print("\n\n{} & {}, winner: {}".format(self.is_alive(), opponent.is_alive(), winner))
+            return winner
 
 if __name__ == "__main__":
     # If you run this file from the terminal
     # this block is executed.
+    print("\t\t______TESTING______\n")
+    
+    print("______First Hero______")
     hero = Hero("Iron Bat", 200)
-    print("Your new Hero is: {} starting with: {} hp\n".format(
-        hero.name, hero.current_health))
-
-    hero.add_ability(Ability("Lazar Eyes", 500))
+    print("______First Hero's Abilities______")
+    hero.add_ability(Ability("Lazar Eyes", 100))
     hero.add_ability(Ability("Super Speed", 50))
+    hero.add_ability(Ability("Strength", 30))
     hero.display_abilities()
     print(hero.abilities)
 
-    hero.get_current_health()
-    print("\nIs the hero still alive: {}".format(hero.is_alive()))
-    hero.take_damage(50)
-    hero.get_current_health()
-    print("\nIs the hero still alive: {}".format(hero.is_alive()))
+    #print("\nputting on chest plate for protection")
+    #hero.add_armor(Armor("Chest Plate", 60))
 
-    print("\nputting on chest plate for protection")
-    hero.add_armor(Armor("Chest Plate", 60))
-    hero.take_damage(50)
-    hero.get_current_health()
-    print("\nIs the hero still alive: {}".format(hero.is_alive()))
+    print()
+
+    print("______Second Hero______")
+    opponent = Hero("Strange Sponge", 200)
+    print("______Second Hero's Abilities______")
+    opponent.add_ability(Ability("Soapy", 50))
+    opponent.add_ability(Ability("Gross food", 150))
+    opponent.display_abilities()
+    print(opponent.abilities)
+
+    print("\t\t______FIGHT TESTING______\n")
+    hero.fight(opponent)
