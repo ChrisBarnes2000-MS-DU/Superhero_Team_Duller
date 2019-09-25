@@ -29,6 +29,19 @@ class Armor():
         ''' Return a random value between 0 and the initialized max_block strength. '''
         return random.randint(0, self.max_block)
 
+class weapons(Ability):
+    def attack(self):
+        """  This method returns a random value
+        between one half to the full attack power of the weapon.
+        """
+        return random.randint((self.max_damage//2), self.max_damage)
+
+    def __repr__(self):
+        return "Weapon: {}, max damage: {}".format(self.name, self.max_damage)
+
+
+
+
 class Hero():
     def __init__(self, name, starting_health = 100):
         '''Instance properties:
