@@ -4,8 +4,7 @@ class Ability():
     def __init__(self, name, max_damage):
        '''Create Instance Variables:
           name:String
-          max_damage: Integer
-       '''
+          max_damage: Integer'''
        self.name = name
        self.max_damage = max_damage
 
@@ -20,8 +19,7 @@ class Armor():
     def __init__(self, name, max_block):
         '''Instantiate instance properties.
             name: String
-            max_block: Integer
-        '''
+            max_block: Integer'''
         self.name = name
         self.max_block = max_block
 
@@ -32,15 +30,11 @@ class Armor():
 class weapons(Ability):
     def attack(self):
         """  This method returns a random value
-        between one half to the full attack power of the weapon.
-        """
+        between one half to the full attack power of the weapon. """
         return random.randint((self.max_damage//2), self.max_damage)
 
     def __repr__(self):
         return "Weapon: {}, max damage: {}".format(self.name, self.max_damage)
-
-
-
 
 class Hero():
     def __init__(self, name, starting_health = 100):
@@ -49,8 +43,7 @@ class Hero():
           armors: List
           name: String
           starting_health: Integer
-          current_health: Integer
-      '''
+          current_health: Integer'''
         self.name = name
         self.starting_health = starting_health
         self.current_health = starting_health
@@ -72,8 +65,7 @@ class Hero():
 
     def attack(self):
         '''Calculate the total damage from all ability attacks.
-            return: total:Int
-        '''
+            return: total:Int'''
         total_damage = 0
         for ability in self.abilities:
             total_damage += ability.attack()
@@ -81,14 +73,12 @@ class Hero():
 
     def add_armor(self, armor):
         '''Add armor to self.armors
-          Armor: Armor Object
-        '''
+          Armor: Armor Object'''
         self.armor.append(armor)
 
     def defend(self, incoming_damage):
         '''Runs `block` method on each armor.
-            Returns sum of all blocks
-        '''
+            Returns sum of all blocks'''
         total_block = 0
         if len(self.armor) == 0:
             print("{} has no armor on, so 0 defence is provided".format(self.name))
@@ -124,8 +114,7 @@ class Hero():
     def fight(self, opponent):
         ''' Current Hero will take turns fighting the opponent hero passed in.'''
         """This function will need to take into account the possibility that both heroes may not have abilities and therefore will do no damage.
-        --check if to see that at least one hero has an ability. If no abilities exist print out "Draw"
-        """
+        --check if to see that at least one hero has an ability. If no abilities exist print out "Draw" """
         if len(self.abilities) == 0 or len(opponent.abilities) == 0: print("Draw")
         else:
             winner = ""
@@ -149,6 +138,30 @@ class Hero():
                 winner = ("{} won!".format(self.name))
             print("\n\n{} & {}, winner: {}".format(self.is_alive(), opponent.is_alive(), winner))
             return winner
+
+class Team():
+    def __init__(self, name):
+        '''Initialize your team with its team name
+            name: String'''
+        self.name = name
+        self.members = []
+
+    def add_hero(self, hero):
+        '''addhero: Parameters: hero: String'''
+        self.members.append(hero)
+
+    def remove_hero(self, name):
+        '''Remove hero from heroes list.
+        If Hero isn't found return 0
+        removehero: Parameters name: String'''
+        if name in self.members:
+            self.members.remove(name)
+        else: return 0
+
+    def view_all_heroes(self):
+        '''Prints out all heroes to the console.'''
+        for member in self.members:
+            print(member)
 
 if __name__ == "__main__":
     # If you run this file from the terminal
