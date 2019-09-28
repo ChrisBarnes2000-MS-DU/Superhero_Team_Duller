@@ -119,15 +119,14 @@ class Hero():
         else:
             winner = ""
             fighting = True
+            num_rounds = 0 
             while (fighting):
-                print("\n\t___First Attacker___\n")
-            
+                print("\n\t___First Attacker, round {}___\n".format(num_rounds))
                 print("{} attacks {}".format(self.name, opponent.name))
                 opponent.take_damage(self.attack())
                 fighting = opponent.is_alive()
 
-                print("\n\t___Second Attacker___\n")
-
+                print("\n\t___Second Attacker, round {}___\n".format(num_rounds))
                 print("{} attacks {}".format(opponent.name, self.name))
                 self.take_damage(opponent.attack())
                 fighting = self.is_alive()
@@ -154,14 +153,18 @@ class Team():
         '''Remove hero from heroes list.
         If Hero isn't found return 0
         removehero: Parameters name: String'''
-        if name in self.members:
-            self.members.remove(name)
-        else: return 0
+        for member in self.members:
+            print(member.name)
+        for i, member in enumerate(self.members):
+            print("looking for name {}".format(member.name))
+            if member.name == name:
+                del self.members[i]
+        return 0
 
     def view_all_heroes(self):
         '''Prints out all heroes to the console.'''
         for member in self.members:
-            print(member)
+            print(member.name)
 
 if __name__ == "__main__":
     # If you run this file from the terminal
@@ -192,3 +195,6 @@ if __name__ == "__main__":
 
     print("\t\t______FIGHT TESTING______\n")
     hero.fight(opponent)
+
+    print("\t\t______Team TESTING______\n")
+    

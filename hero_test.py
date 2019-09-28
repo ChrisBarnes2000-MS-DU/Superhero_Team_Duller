@@ -279,10 +279,14 @@ def test_team_remove_hero():
     team = superheroes.Team("One")
     jodie = superheroes.Hero("Jodie Foster")
     team.add_hero(jodie)
+    jade = superheroes.Hero("Jade Marry")
+    team.add_hero(jade)
+    jane = superheroes.Hero("Jane Pots")
+    team.add_hero(jane)
+    print("there are still {} members in the team".format(len(team.members)))
     assert team.members[0].name == "Jodie Foster"
     team.remove_hero("Jodie Foster")
-    assert len(team.members) == 0
-
+    assert len(team.members) == 2, "there are still {} members in the team".format(len(team.members))
 
 def test_team_remove_unlisted():
     # Test that if no results found return 0
