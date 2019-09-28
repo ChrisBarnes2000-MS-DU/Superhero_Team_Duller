@@ -37,7 +37,7 @@ class Weapon(Ability):
         return "Weapon: {}, max damage: {}".format(self.name, self.max_damage)
 
 class Hero():
-    def __init__(self, name, starting_health = 100):
+    def __init__(self, name, starting_health=100, deaths=0, kills=0):
         '''Instance properties:
           abilities: List
           armors: List
@@ -49,6 +49,8 @@ class Hero():
         self.current_health = starting_health
         self.abilities = []
         self.armor = []
+        self.kills = kills
+        self.deaths = deaths
         print("Your new Hero is: {} starting with: {} hp\n".format(self.name, self.current_health))
 
     def add_ability(self, new_ability):
@@ -111,9 +113,23 @@ class Hero():
             print("{} has died".format(self.name))
             return False
 
+    def add_kill(self, new_kills):
+        ''' Update kills with num_kills'''
+        self.kills += new_kills
+
+    def add_death(self):
+        ''' Update deaths with num_deaths'''
+        self.deaths += 1
+
+    def kill_hero(self, opponent):
+        self.current_health = 0
+        self.add_death()
+        opponent.add_kills
+        print("{} has died".format(self.name))
+
     def fight(self, opponent):
         ''' Current Hero will take turns fighting the opponent hero passed in.'''
-        """This function will need to take into account the possibility that both heroes may not have abilities and therefore will do no damage.
+        """This function will need to take into account the possibility that both hero may not have abilities and therefore will do no damage.
         --check if to see that at least one hero has an ability. If no abilities exist print out "Draw" """
         if len(self.abilities) == 0 or len(opponent.abilities) == 0: print("Draw")
         else:
@@ -133,8 +149,12 @@ class Hero():
             '''Check to see whose left alive and return the winner'''
             if (not fighting and opponent.is_alive()):    
                 winner = ("{} won!".format(opponent.name))
+                self.add_death()
+                opponent.add_kills()
             else:
                 winner = ("{} won!".format(self.name))
+                opponent.add_death()
+                self.add_kills()
             print("\n\n{} & {}, winner: {}".format(self.is_alive(), opponent.is_alive(), winner))
             return winner
 
@@ -150,11 +170,9 @@ class Team():
         self.members.append(hero)
 
     def remove_hero(self, name):
-        '''Remove hero from heroes list.
+        '''Remove hero from hero list.
         If Hero isn't found return 0
         removehero: Parameters name: String'''
-        for member in self.members:
-            print(member.name)
         for i, member in enumerate(self.members):
             print("looking for name {}".format(member.name))
             if member.name == name:
@@ -162,9 +180,34 @@ class Team():
         return 0
 
     def view_all_heroes(self):
-        '''Prints out all heroes to the console.'''
+        '''Prints out all hero to the console.'''
         for member in self.members:
             print(member.name)
+    
+    def kill_team(self):
+        for member in self.members:
+            member.kill_hero()
+
+    def attack(self, other_team):
+        ''' Battle each team against each other.'''
+        # TODO: Randomly select a living hero from each team and have
+        # them fight until one or both teams have no surviving hero.
+        # Hint: Use the fight method in the Hero class.
+        pass
+
+    def revive_heroes(self, health=100):
+        ''' Reset all hero health to starting_health'''
+        # TODO: This method should reset all hero health to their
+        # original starting value.
+        pass
+
+    def stats(self):
+        '''Print team statistics'''
+        # TODO: This method should print the ratio of kills/deaths for each
+        # member of the team to the screen.
+        # This data must be output to the console.
+        # Hint: Use the information stored in each hero.
+        pass
 
 if __name__ == "__main__":
     # If you run this file from the terminal
