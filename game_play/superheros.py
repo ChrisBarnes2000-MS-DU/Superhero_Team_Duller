@@ -1,9 +1,8 @@
 import random
-#from Superhero_Team_Duller.game_play import *
 import game_play.Ability as Ability
 import game_play.Armor as Armor
 import game_play.Team as Team
-#import game_play.Weapon as Weapon
+import game_play.Weapon as Weapon
 
 class Hero():
     def __init__(self, name, starting_health=100, deaths=0, kills=0):
@@ -138,33 +137,7 @@ class Hero():
 if __name__ == "__main__":
     # If you run this file from the terminal
     # this block is executed.
-    """
+    
     print("\t\t______TESTING______\n")
     
-    print("______First Hero______")
-    hero = Hero("Iron Bat", 200)
-    print("______First Hero's Abilities______")
-    hero.add_ability(Ability("Lazar Eyes", 100))
-    hero.add_ability(Ability("Super Speed", 50))
-    hero.add_ability(Ability("Strength", 30))
-    hero.display_abilities()
-    print(hero.abilities)
-
-    #print("\nputting on chest plate for protection")
-    #hero.add_armor(Armor("Chest Plate", 60))
-
-    print()
-
-    print("______Second Hero______")
-    opponent = Hero("Strange Sponge", 200)
-    print("______Second Hero's Abilities______")
-    opponent.add_ability(Ability("Soapy", 50))
-    opponent.add_ability(Ability("Gross food", 150))
-    opponent.display_abilities()
-    print(opponent.abilities)
-
-    print("\t\t______FIGHT TESTING______\n")
-    hero.fight(opponent)
-
-    print("\t\t______Team TESTING______\n")
-    """
+    

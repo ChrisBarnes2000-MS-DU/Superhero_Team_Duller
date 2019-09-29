@@ -1,5 +1,5 @@
-from superheros import *
-
+import game_play
+from game_play.superheros import *
 class Areana():
     def __init__(self):
         '''Instantiate properties
@@ -18,7 +18,7 @@ class Areana():
         # TODO: This method will allow a user to create an ability.
         # Prompt the user for the necessary information to create a new ability object.
         # return the new ability object.
-        new_ability = Ability.Ability(input("New Ability's Name: "), input("Ability's Max Damage: "))
+        new_ability = Ability(input("New Ability's Name: "), input("Ability's Max Damage: "))
         return new_ability
 
     def create_weapon(self):
