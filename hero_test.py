@@ -15,19 +15,15 @@ def capture_console_output(function_body):
     return string_io.getvalue()
 
 # Test Abilities Class
-
-
 def test_ability_instance():
     # Test instantiation without error
     big_strength = superheroes.Ability("Overwhelming Strength", 300)
     assert big_strength
 
-
 def test_ability_name():
     # Test for Correct Name
     big_strength = superheroes.Ability("Overwhelming Strength", 300)
     assert big_strength.name == "Overwhelming Strength"
-
 
 def test_ability_attack():
     # Test for correct attack value
@@ -38,12 +34,9 @@ def test_ability_attack():
         assert attack >= 0 and attack <= 400
 
 # Test Weapons Class
-
-
 def test_weapon_instance():
     big_stick = superheroes.Weapon("Overwhelming Stick", 200)
     assert "Weapon" in str(big_stick)
-
 
 def test_weapon_attack():
     big_stick = superheroes.Weapon("Overwhelming Stick", 200)
@@ -52,12 +45,10 @@ def test_weapon_attack():
         attack = big_stick.attack()
         assert attack <= 200 and attack >= 100
 
-
 # Test Heroes Class
 def test_hero_instance():
     Athena = superheroes.Hero("Athena")
     assert Athena
-
 
 def test_hero_add_ability():
     big_strength = superheroes.Ability("Overwhelming Strength", 300)
@@ -68,7 +59,6 @@ def test_hero_add_ability():
     # Check for correct type
     assert "Ability" in str(Athena.abilities[0])
     assert Athena.abilities[0].name == "Overwhelming Strength"
-
 
 def test_hero_add_multi_ability():
     big_strength = superheroes.Ability("Overwhelming Strength", 300)
@@ -83,7 +73,6 @@ def test_hero_add_multi_ability():
     assert "Ability" in str(Athena.abilities[0])
     assert Athena.abilities[0].name == "Overwhelming Strength"
 
-
 def test_hero_attack_ability():
     big_strength = superheroes.Ability("Overwhelming Strength", 30000)
     athena = superheroes.Hero("Athena")
@@ -91,7 +80,6 @@ def test_hero_attack_ability():
     athena.add_ability(big_strength)
     attack = athena.attack()
     assert attack <= 30000 and attack >= 0
-
 
 def test_hero_ability_attack_mean_value():
     athena = superheroes.Hero("Athena")
@@ -120,7 +108,6 @@ def test_hero_ability_attack_mean_value():
     assert actual_mean <= calculated_mean + \
         accepted_window and actual_mean >= calculated_mean - accepted_window
 
-
 def test_hero_ability_attack_standard_deviation():
     willow_waffle = superheroes.Hero("Willow Waffle")
     strength = random.randint(400, 30000)
@@ -143,7 +130,6 @@ def test_hero_ability_attack_standard_deviation():
     print("Standard Deviation Cannot be 0.\nRandom Numbers not generated for attack.")
     assert standard_dev != 0.0
 
-
 def test_hero_weapon_equip():
     sans = superheroes.Hero("Comic Sans")
     weapon = superheroes.Weapon("Garlic Hot Sauce", 400)
@@ -153,8 +139,6 @@ def test_hero_weapon_equip():
 
 # This tests if the average of all attacks is correct.
 # This test will fail if the random range of values is not correct.
-
-
 def test_hero_weapon_attack_mean_value():
     kkrunch = superheroes.Hero("Kaptain Krunch")
     strength = random.randint(10, 30000)
@@ -187,8 +171,6 @@ def test_hero_weapon_attack_mean_value():
 
 # This method uses statistics to check that a random value is given.
 # This test will only fail if the same value is returned over the course of 1000 runs.
-
-
 def test_hero_attack_standard_deviation():
     willow_waffle = superheroes.Hero("Willow Waffle")
     strength = random.randint(400, 30000)
@@ -211,7 +193,6 @@ def test_hero_attack_standard_deviation():
     print("Random values not given. Please make sure you're not returning the same value every time.")
     assert standard_dev != 0.0
 
-
 def test_hero_attack_weapon():
     big_strength = superheroes.Ability("Overwhelming Strength", 200)
     Athena = superheroes.Hero("Athena")
@@ -220,7 +201,6 @@ def test_hero_attack_weapon():
     for _ in range(0, test_runs):
         attack = big_strength.attack()
         assert attack <= 200 and attack >= 0
-
 
 def test_hero_multi_weapon_attack():
     strength = superheroes.Weapon("Overwhelming Strength", 200)
@@ -235,7 +215,6 @@ def test_hero_multi_weapon_attack():
         attack = Athena.attack()
         assert attack <= 900 and attack >= 0
 
-
 def test_hero_weapon_ability_attack():
     quickness = superheroes.Ability("Quickness", 1300)
     sword_of_truth = superheroes.Weapon("Sword of Truth", 700)
@@ -245,7 +224,6 @@ def test_hero_weapon_ability_attack():
     assert len(Athena.abilities) == 2
     attack_avg(Athena, 0, 2000)
 
-
 def attack_avg(object, low, high):
     test_runs = 100
     for _ in range(0, test_runs):
@@ -253,17 +231,13 @@ def attack_avg(object, low, high):
         assert attack <= high and attack >= low
 
 # Test Teams
-
-
 def test_team_instance():
     team = superheroes.Team("One")
     assert team
 
-
 def test_team_name():
     team = superheroes.Team("One")
     assert team.name == "One"
-
 
 def test_team_hero():
     team = superheroes.Team("One")
@@ -271,7 +245,6 @@ def test_team_hero():
     team.add_hero(jodie)
     assert len(team.members) == 1
     assert team.members[0].name == "Jodie Foster"
-
 
 def test_team_remove_hero():
     team = superheroes.Team("One")
@@ -294,11 +267,9 @@ def test_team_remove_unlisted():
     code = team.remove_hero("Athena")
     assert code == 0
 
-
 def test_team_remove_empty_list():
     team = superheroes.Team("One")
     assert team.remove_hero("Athena") == 0
-
 
 def test_print_heroes():
     team = superheroes.Team("One")

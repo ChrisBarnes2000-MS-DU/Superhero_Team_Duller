@@ -1,40 +1,9 @@
 import random
-
-class Ability():
-    def __init__(self, name, max_damage):
-       '''Create Instance Variables:
-          name:String
-          max_damage: Integer'''
-       self.name = name
-       self.max_damage = max_damage
-
-    def attack(self):
-        ''' Return a value between 0 and the value set by self.max_damage.'''
-        return random.randint(0, self.max_damage)
-
-    def __repr__(self):
-        return "Ability: {}, max damage: {}".format(self.name, self.max_damage)
-
-class Armor():
-    def __init__(self, name, max_block):
-        '''Instantiate instance properties.
-            name: String
-            max_block: Integer'''
-        self.name = name
-        self.max_block = max_block
-
-    def block(self):
-        ''' Return a random value between 0 and the initialized max_block strength. '''
-        return random.randint(0, self.max_block)
-
-class Weapon(Ability):
-    def attack(self):
-        """  This method returns a random value
-        between one half to the full attack power of the weapon. """
-        return random.randint((self.max_damage//2), self.max_damage)
-
-    def __repr__(self):
-        return "Weapon: {}, max damage: {}".format(self.name, self.max_damage)
+#from Superhero_Team_Duller.game_play import *
+import game_play.Ability as Ability
+import game_play.Armor as Armor
+import game_play.Team as Team
+#import game_play.Weapon as Weapon
 
 class Hero():
     def __init__(self, name, starting_health=100, deaths=0, kills=0):
@@ -102,7 +71,7 @@ class Hero():
         print("{} is now at {}/{} hp".format(self.name, self.current_health, self.starting_health))
 
     def get_current_health(self):
-        print("Your hero's current hp is: {}".format(hero.current_health))
+        print("Your hero's current hp is: {}".format(self.current_health))
 
     def is_alive(self):
         '''Return True or False depending on whether the hero is alive or not.'''
@@ -154,64 +123,18 @@ class Hero():
             else:
                 winner = ("{} won!".format(self.name))
                 opponent.add_death()
-                self.add_kills()
+                self.add_kill(1)
             print("\n\n{} & {}, winner: {}".format(self.is_alive(), opponent.is_alive(), winner))
             return winner
 
-class Team():
-    def __init__(self, name):
-        '''Initialize your team with its team name
-            name: String'''
-        self.name = name
-        self.members = []
 
-    def add_hero(self, hero):
-        '''addhero: Parameters: hero: String'''
-        self.members.append(hero)
 
-    def remove_hero(self, name):
-        '''Remove hero from hero list.
-        If Hero isn't found return 0
-        removehero: Parameters name: String'''
-        for i, member in enumerate(self.members):
-            print("looking for name {}".format(member.name))
-            if member.name == name:
-                del self.members[i]
-        return 0
 
-    def view_all_heroes(self):
-        '''Prints out all hero to the console.'''
-        for member in self.members:
-            print(member.name)
-    
-    def kill_team(self):
-        for member in self.members:
-            member.kill_hero()
-
-    def attack(self, other_team):
-        ''' Battle each team against each other.'''
-        # TODO: Randomly select a living hero from each team and have
-        # them fight until one or both teams have no surviving hero.
-        # Hint: Use the fight method in the Hero class.
-        pass
-
-    def revive_heroes(self, health=100):
-        ''' Reset all hero health to starting_health'''
-        # TODO: This method should reset all hero health to their
-        # original starting value.
-        pass
-
-    def stats(self):
-        '''Print team statistics'''
-        # TODO: This method should print the ratio of kills/deaths for each
-        # member of the team to the screen.
-        # This data must be output to the console.
-        # Hint: Use the information stored in each hero.
-        pass
 
 if __name__ == "__main__":
     # If you run this file from the terminal
     # this block is executed.
+    """
     print("\t\t______TESTING______\n")
     
     print("______First Hero______")
@@ -240,4 +163,4 @@ if __name__ == "__main__":
     hero.fight(opponent)
 
     print("\t\t______Team TESTING______\n")
-    
+    """
