@@ -1,6 +1,6 @@
 import game_play
 from game_play.superheros import *
-class Areana():
+class Arena():
     def __init__(self):
         '''Instantiate properties
             team_one: None
@@ -119,11 +119,11 @@ class Areana():
         # TODO: This method should battle the teams together.
         # Call the attack method that exists in your team objects
         # for that battle functionality.
-        Team.attack()
-
+        #self.attack()
+        pass
 
 if __name__ == "__main__":
-    arena = Areana()
+    arena = Arena()
     arena.build_team_one()
     arena.build_team_two()
     arena.team_battle()

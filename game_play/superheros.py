@@ -1,8 +1,8 @@
 import random
-import game_play.Ability as Ability
-import game_play.Armor as Armor
-import game_play.Team as Team
-import game_play.Weapon as Weapon
+import Ability
+import Arena as Arena
+import Armor
+import Weapon
 
 class Hero():
     def __init__(self, name, starting_health=100, deaths=0, kills=0):
@@ -131,13 +131,27 @@ class Hero():
             return winner
 
 
-
-
-
 if __name__ == "__main__":
-    # If you run this file from the terminal
-    # this block is executed.
-    
-    print("\t\t______TESTING______\n")
-    
-    
+    game_is_running = True
+
+    # Instantiate Game Arena
+    arena = Arena()
+
+    #Build Teams
+    arena.build_team_one()
+    arena.build_team_two()
+
+    while game_is_running:
+
+        arena.team_battle()
+        arena.show_stats()
+        play_again = input("Play Again? Y or N: ")
+
+        #Check for Player Input
+        if play_again.lower() == "n":
+            game_is_running = False
+
+        else:
+            #Revive heroes to play again
+            arena.team_one.revive_heroes()
+            arena.team_two.revive_heroes()

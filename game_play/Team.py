@@ -53,12 +53,28 @@ class Team():
         pass
 
     def stats(self):
-        '''Print team statistics'''
+        '''Prints team statistics to terminal.'''
+        # TODO: This method should print out battle statistics
         # TODO: This method should print the ratio of kills/deaths for each
         # member of the team to the screen.
+        # including each team's average kill/death ratio.
+        # Required Stats:
+        #     Declare winning team
+        #     Show both teams average kill/death ratio.
+        #     Show surviving heroes.
         # This data must be output to the console.
         # Hint: Use the information stored in each hero.
-        pass
+        for members in self.dead_members:
+            print("Member {}: had {} kills & {} deaths").format(members.name, members.kill, members.deaths)
+            
+    def winning_team(self, opponent):
+        if len(self.dead_members) == len(self.members):
+            print("Your Team Lost all its members: You Lost")
+            Team.stats()
+        elif len(self.members) >= len(opponent.members):
+            print("Your Teams dead members are")
+            Team.stats()
 
-        def __repr__(self):
-            return "Team name: {}, Members: {}".format(self.name, self.view_all_heros())
+
+    def __repr__(self):
+        return "Team name: {}, Members: {}".format(self.name, self.view_all_heros())
